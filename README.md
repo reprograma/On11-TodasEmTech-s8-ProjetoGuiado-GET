@@ -1,2 +1,2 @@
 # On11-TodasEmTech-s8-ProjetoGuiado-GET
-Semana 8 – Projeto Prático com API
+Turma Online 11 - Todas em Tech | Back-end | 2021 | Projeto Prático com API - Método: GET
