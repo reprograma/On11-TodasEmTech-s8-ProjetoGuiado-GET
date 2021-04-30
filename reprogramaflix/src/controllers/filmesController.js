@@ -29,8 +29,27 @@ const getByTitle = (request, response)=>{
     }
 }
 
+const getByGenre = (request, response)=>{
+    const generoRequisitado = request.query.genero
+    let novaLista =[]
+   
+    filmes.forEach(filme =>{//percorrendo o json de filmes
+        let generoLista = filme.Genre.split(",") //transformei string de generos em lista
+        for(item of generoLista){//percorri a lista de generos
+            //SE o item for igual genero da requisição E SE o filme.Genero tiver esse item
+            if(item.includes(generoRequisitado) && filme.Genre.includes(item)){
+                console.log(filme)
+                novaLista.push(filme)
+            }
+        }
+    })
+
+    response.status(200).send(novaLista)
+}
+
 module.exports = { //exportando as funções
     getAll,
     getById,
-    getByTitle
+    getByTitle,
+    getByGenre
 }
