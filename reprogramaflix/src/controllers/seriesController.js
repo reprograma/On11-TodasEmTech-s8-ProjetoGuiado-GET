@@ -31,7 +31,16 @@ const getById = (request, response) => {
     }
 }
 
+const getByGenre = (request, response) => {
+    const genreInput = series.find(serie => serie.genre)
+    //console.log(genreIput)
+    //const genreFilter = series.find(serie => serie.genre == genreInput)
+
+    response.status(200).json(genreInput)
+}
+
 module.exports = {
     getSeries,
-    getById
+    getById,
+    getByGenre
 }
