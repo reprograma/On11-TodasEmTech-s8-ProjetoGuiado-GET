@@ -1,5 +1,3 @@
-const app = require("./src/app")
-
-app.listen(8080, ()=>{
-    console.log("Uhuuul nova iguaçu na porta 8080")
-})
+const app = require("./src/app");
+const porta = 8080;
+app.listen(porta, () => console.log(`Rodando na porta ${porta}`))
