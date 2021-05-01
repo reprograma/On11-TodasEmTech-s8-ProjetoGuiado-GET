@@ -4,10 +4,10 @@ const getAll = (request, response)=>{ //criar função getAll
     response.status(200).send(filmes)
 }
 const getById = (request, response)=>{
-    const idRequerido = request.params.id
-    let idFiltrado = filmes.find(filme => filme.id == idRequerido)
+    const id = request.params.id
+    let idFiltrado = filmes.find(filme => filme.id == id)
 
-    if(idFiltrado == undefined || idRequerido == " "){
+    if(idFiltrado == undefined || id == " "){
         response.status(404).json([{
             "mensagem":"id não existente"
         }])
