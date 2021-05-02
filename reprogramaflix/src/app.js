@@ -1,8 +1,12 @@
-const express = require("express") //chama o express
-const app = express() //executar express
+const express = require("express");
+const app = express();
 
-const filmes = require("./routes/filmesRoutes") //chamando todas as rotas
+// Chamando a continuação das rotas
+const filmes = require("./routes/filmesRoutes");
+const series = require("./routes/seriesRoutes");
 
-app.use("/filmes", filmes) //colocando a rota raiz
+// Rota raíz
+app.use("/filmes", filmes);
+app.use("/series", series);
 
-module.exports = app //exportando app
+module.exports = app;
