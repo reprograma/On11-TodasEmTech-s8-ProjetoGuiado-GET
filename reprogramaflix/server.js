@@ -1,3 +1,4 @@
+
 //const filmes = require("./models/filmes.json")
 //const series = require("./models/series.json")
 const app = require("./src/app")
@@ -25,3 +26,4 @@ app.listen(8080, ()=>{console.log("projeto semana 8 na porta 8080")})
 
 
 // app.listen(3535, ()=>console.log("servidor para o lar rodando na porta 3535")
+
