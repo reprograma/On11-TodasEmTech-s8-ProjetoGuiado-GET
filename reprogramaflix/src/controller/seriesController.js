@@ -1,11 +1,11 @@
-const filmes = require("../models/filmes.json")
+const series = require("../models/series.json")
 
 const getAll = (request, response)=>{
-    response.status(200).send(filmes)
+    response.status(200).send(series)
 }
 const getById = (request, response)=>{
     const idRequirido = request.params.id
-    let idFiltrado = filmes.find(filme => filme.id == idRequirido)
+    let idFiltrado = series.find(serie => serie.id == idRequirido)
     if(idFiltrado == undefined || idRequirido == " "){
         response.status(404).json([{
             "mensagem":"id não existente"
@@ -17,15 +17,15 @@ const getById = (request, response)=>{
 
 const getByTitle = (request, response)=>{
     const titulo = request.query.titulo.toLowerCase()
-    const filmeFiltrado = filmes.find(filme => filme.Title.toLowerCase().includes(titulo))
-    response.status(200).send(filmeFiltrado)
+    const serieFiltrado = series.find(serie => serie.title.toLowerCase().includes(titulo))
+    response.status(200).send(serieFiltrado)
 
-    if( titulo == " " || filmeFiltrado == undefined){
+    if( titulo == " " || serieFiltrado == undefined){
         response.status(400).json([{
             "mensagem":"por favor, digite um título válido"
         }])
     } else {
-        response.status(200).send(filmeFiltrado)
+        response.status(200).send(serieFiltrado)
     }
 
 
@@ -33,15 +33,16 @@ const getByTitle = (request, response)=>{
 
 const getBygenre = (request, response)=>{
     const generoRequisitado = request.query.genero
+    const novaLista = []
     // array.foreach(elemento=>{logica})
-    filmes.forEach(filme =>{ // percorrendo o json de filmes
+    series.forEach(serie =>{ // percorrendo o json de series
         //string que esta em genre e separa a partir da virgula como referencia
-        let generoLista = filme.Genre.split(",")
+        let generoLista = serie.genre
         for(item of generoLista){ // percorri a lista de generos
            // Se o item for igual genero 
-            if(item.includes(generoRequisitado) && filme.Genre.includes(item) ){
-                console.log(filme)
-                novaLista.push(filme)
+            if(item.includes(generoRequisitado) && serie.genre.includes(item) ){
+                
+                novaLista.push(serie)
             }
         }
     })
