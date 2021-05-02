@@ -1,5 +1,4 @@
-
-const controller = require("../controllers/filmesController")
+const controller = require("../controllers/seriesController")
 
 const express = require("express")
 const router = express.Router()

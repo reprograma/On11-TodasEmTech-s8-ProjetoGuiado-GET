@@ -1,5 +1,5 @@
 const app = require("./src/app")
 
-app.listen(8080, ()=>{
-    console.log("Uhuuul nova iguaçu na porta 8080")
+app.listen(3030, () => {
+    console.log("Ta funcionando na porta 3030")
 })
