@@ -1,6 +1,4 @@
-//Rotas e verbos utilizados
-
-const controller  = require("../controllers/filmesController")//chama o controler
+const controller  = require("../controllers/seriesController")//chama o controler usar ../ para olhar fora da pasta routes
 
 const express = require("express")//chamando o express 
 const router = express.Router()//executando Router

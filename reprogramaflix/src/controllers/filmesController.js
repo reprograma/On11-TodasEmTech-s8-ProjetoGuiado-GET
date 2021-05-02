@@ -1,3 +1,4 @@
+//Requisição do json e toda a logica
 const filmes = require("../models/filmes.json") //chamar nosso json
 
 const getAll = (request, response)=>{ //criar função getAll
