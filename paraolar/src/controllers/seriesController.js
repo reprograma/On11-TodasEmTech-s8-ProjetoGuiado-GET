@@ -34,29 +34,22 @@ const getByTitle = (request, response) =>{
 }
 const getByGenre = (request, response) =>{
     const genre = request.query.genre 
+    let novaLista = []
     series.forEach(serie => {
         for(item of genre){
             if(item.includes(genre) && serie.genre.includes(item)){
-                console.log(series);
-                
-
+              novaLista.push(serie)
             }
         }
-
     });
 
-
-
-   // const genreFiltrado =  series.find(serie => serie.genre.toLowerCase().includes(genre))
-
-
-    // if(genreFiltrado == undefined || genre == ""){
-    //     response.status(400).json([{
-    //         "mensagem":"Por favor, digite um titulo válido!"
-    //     }])
-    // }else{
-    //  response.status(200).json(genreFiltrado)
-    // }
+    if(genre == undefined || genre == ""){
+        response.status(400).json([{
+            "mensagem":"Por favor, digite um titulo válido!"
+        }])
+    }else{
+     response.status(200).json(novaLista)
+    }
 }
 
 module.exports = {
