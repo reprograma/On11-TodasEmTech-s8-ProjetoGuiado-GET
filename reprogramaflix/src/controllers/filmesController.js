@@ -1,11 +1,12 @@
 const filmes = require("../models/filmes.json") //chamar nosso json
 
+
 const getAll = (request, response)=>{ //criar função getAll
     response.status(200).send(filmes)
 }
 const getById = (request, response)=>{
     const idRequerido = request.params.id
-    let idFiltrado = filmes.find(filme => filme.id == idRequerido)
+    const idFiltrado = filmes.find(filme => filme.id == idRequerido)
 
     if(idFiltrado == undefined || idRequerido == " "){
         response.status(404).json([{
