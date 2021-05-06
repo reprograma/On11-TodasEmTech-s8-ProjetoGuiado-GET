@@ -43,7 +43,7 @@ const getByGenreSeries = (request, response) => {
     series.forEach(serie => {
        let genreList = serie.genre
        for(genero of genreList){
-           if(genero.includes(genreSeries) && serie.genre.includes(genero)){
+           if(genero.includes(genreSeries)){
                console.log(serie)
                newListSeries.push(serie)
            }
