@@ -36,7 +36,7 @@ const getByTitle = (request, response)=>{
 // Função que retorna um filme por gênero
 const getByGenre = (request, response)=>{
     // Guarda a requisição enviada pelo client
-    const generoRequerido = request.query.genero; // chave: genero
+    const generoRequerido = request.query.genero.toLowerCase();; // chave: genero
 
     // Cria um array vazio
     const novaLista = [];
@@ -52,7 +52,7 @@ const getByGenre = (request, response)=>{
         // Percorre a lista de generos
         for (genero of generoLista){
             // Se o genero for igual ao genero da requisição
-            if (genero.includes(generoRequerido)) {
+            if (genero.toLowerCase().includes(generoRequerido)) {
                 novaLista.push(filme);
             }
         }
