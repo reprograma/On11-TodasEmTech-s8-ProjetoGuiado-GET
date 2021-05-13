@@ -1,5 +1,5 @@
-const express = require("express");
-const app = express();
+const express = require("express"); // Importando o express
+const app = express(); // Executando o express
 
 // Chamando a continuação das rotas
 const filmes = require("./routes/filmesRoutes");

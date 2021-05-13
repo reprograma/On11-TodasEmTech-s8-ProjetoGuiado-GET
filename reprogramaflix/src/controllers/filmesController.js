@@ -1,4 +1,4 @@
-const filmes = require("../models/filmes.json");
+const filmes = require("../models/filmes.json"); // Importa o json de filmes
 
 // Função que retorna todos os filmes
 const getAll = (request, response)=>{
@@ -7,25 +7,24 @@ const getAll = (request, response)=>{
 
 // Função que retorna um filme pelo id
 const getById = (request, response)=>{
-    const idRequerido = request.params.idReq;
+    const idRequerido = request.params.id; // chave: id
     const idFiltrado = filmes.find(filme => filme.id == idRequerido);
 
-    if (idRequerido == null || idFiltrado == undefined) {
-        response.status(400).json([{
+    if (idRequerido == "" || idFiltrado == undefined) {
+        response.status(404).json([{
             "mensagem": "id inválido"
         }])
     } else {
         response.status(200).send(idFiltrado);
     }
-
 }
 
 // Função que retorna um filme pelo título
 const getByTitle = (request, response)=>{
-    const titulo = request.query.titulo.toLowerCase();
+    const titulo = request.query.titulo.toLowerCase(); // chave: titulo
     const filmeFiltrado = filmes.find(filme => filme.Title.toLowerCase().includes(titulo));
 
-    if (titulo == null || filmeFiltrado == undefined) {
+    if (titulo == "" || filmeFiltrado == undefined) {
         response.status(400).json([{
             "mensagem": "Por favor, digite um título válido"
         }])
@@ -36,24 +35,32 @@ const getByTitle = (request, response)=>{
 
 // Função que retorna um filme por gênero
 const getByGenre = (request, response)=>{
-    const generoRequisitado = request.query.genero.toLowerCase();
+    // Guarda a requisição enviada pelo client
+    const generoRequerido = request.query.genero; // chave: genero
+
+    // Cria um array vazio
     const novaLista = [];
 
+    // Estrutura do foreach (elemento é a unidade)
     // array.foreach(elemento=>{logica})
+
+    // Percorre o json filme
     filmes.forEach(filme => {
+        // Usar a 'split' para separar uma string a partir da vírgula
         const generoLista = filme.Genre.split(",");
 
-        for (item of generoLista){
-
-            if (item.includes(generoRequisitado) && filme.Genre.includes(item)) {
-                novaLista.push(filme)
+        // Percorre a lista de generos
+        for (genero of generoLista){
+            // Se o genero for igual ao genero da requisição
+            if (genero.includes(generoRequerido)) {
+                novaLista.push(filme);
             }
         }
-    });
+    })
     response.status(200).send(novaLista);
 }
 
-// Exporta cada função criada no controller
+// Exporta cada função
 module.exports = {
     getAll,
     getById,
