@@ -7,12 +7,12 @@ const getAll = (request, response)=>{
 
 // Função que retorna uma serie pelo id
 const getById = (request, response)=>{
-    const idRequerido = request.params.idReq;
+    const idRequerido = request.params.id;
     const idFiltrado = series.find(serie => serie.id == idRequerido);
 
-    if (idRequerido == null || idFiltrado == undefined) {
+    if (idRequerido == "" || idFiltrado == undefined) {
         response.status(400).json([{
-            "mensagem": "id inválido"
+            "mensagem": "Por favor, digite um id inválido"
         }])
     } else {
         response.status(200).send(idFiltrado);
@@ -24,7 +24,7 @@ const getByTitle = (request, response)=>{
     const titulo = request.query.titulo.toLowerCase();
     const serieFiltrada = series.find(serie => serie.title.toLowerCase().includes(titulo));
 
-    if (titulo == null || serieFiltrada == undefined) {
+    if (titulo == "" || serieFiltrada == undefined) {
         response.status(400).json([{
             "mensagem": "Por favor, digite um título válido"
         }])
@@ -34,15 +34,16 @@ const getByTitle = (request, response)=>{
 }
 
 // Função que retorna serie pelo genero
-const getByGenre = (request,response) =>{
-    const generoRequisitado = request.query.genero
-
+const getByGenre = (request, response) =>{
+    const generoRequisitado = request.query.genero.toLowerCase();
+    
+    const novaLista = [];
+    
     series.forEach(serie => {
        const generoLista = serie.genre
 
-       for (item of generoLista){
-
-          if(item.includes(generoRequisitado) && serie.genre.includes(item)){
+       for (genero of generoLista){
+          if(genero.toLowerCase().includes(generoRequisitado) && serie.genre.includes(genero)){
             novaLista.push(serie);
           }
         }
