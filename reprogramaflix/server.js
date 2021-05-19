@@ -1,5 +1,6 @@
-const app = require("./src/app")
+const app = require("./src/app");
+const port = 3030;
 
-app.listen(8080, ()=>{
-    console.log("Uhuuul nova iguaçu na porta 8080")
+app.listen(port, ()=>{
+    console.log(`ReprogramaFlix app listening at http://localhost:${port}`);
 })

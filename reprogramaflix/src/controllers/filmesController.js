@@ -1,53 +1,67 @@
-const filmes = require("../models/filmes.json") //chamar nosso json
+const filmes = require("../models/filmes.json"); // Importa o json de filmes
 
-const getAll = (request, response)=>{ //criar função getAll
-    response.status(200).send(filmes)
+// Função que retorna todos os filmes
+const getAll = (request, response)=>{
+    response.status(200).send(filmes); // 'send' não constroi json
 }
+
+// Função que retorna um filme pelo id
 const getById = (request, response)=>{
-    const idRequerido = request.params.id
-    let idFiltrado = filmes.find(filme => filme.id == idRequerido)
+    const idRequerido = request.params.id; // chave: id
+    const idFiltrado = filmes.find(filme => filme.id == idRequerido);
 
-    if(idFiltrado == undefined || idRequerido == " "){
+    if (idRequerido == "" || idFiltrado == undefined) {
         response.status(404).json([{
-            "mensagem":"id não existente"
-        }])
-    }else{
-        response.status(200).json(idFiltrado)       
-    }   
-}
-
-const getByTitle = (request, response)=>{
-    const titulo = request.query.titulo.toLowerCase()
-    const filmeFiltrado = filmes.find(filme => filme.Title.toLowerCase().includes(titulo))
-
-    if(titulo == "" || filmeFiltrado == undefined){
-        response.status(400).json([{
-            "mensagem":"por favor, digite um titulo válido"
+            "mensagem": "id inválido"
         }])
     } else {
-        response.status(200).send(filmeFiltrado)
+        response.status(200).send(idFiltrado);
     }
 }
 
+// Função que retorna um filme pelo título
+const getByTitle = (request, response)=>{
+    const titulo = request.query.titulo.toLowerCase(); // chave: titulo
+    const filmeFiltrado = filmes.find(filme => filme.Title.toLowerCase().includes(titulo));
+
+    if (titulo == "" || filmeFiltrado == undefined) {
+        response.status(400).json([{
+            "mensagem": "Por favor, digite um título válido"
+        }])
+    } else {
+        response.status(200).send(filmeFiltrado);
+    }
+}
+
+// Função que retorna um filme por gênero
 const getByGenre = (request, response)=>{
-    const generoRequisitado = request.query.genero
-    let novaLista =[]
-   
-    filmes.forEach(filme =>{//percorrendo o json de filmes
-        let generoLista = filme.Genre.split(",") //transformei string de generos em lista
-        for(item of generoLista){//percorri a lista de generos
-            //SE o item for igual genero da requisição E SE o filme.Genero tiver esse item
-            if(item.includes(generoRequisitado) && filme.Genre.includes(item)){
-                console.log(filme)
-                novaLista.push(filme)
+    // Guarda a requisição enviada pelo client
+    const generoRequerido = request.query.genero.toLowerCase();; // chave: genero
+
+    // Cria um array vazio
+    const novaLista = [];
+
+    // Estrutura do foreach (elemento é a unidade)
+    // array.foreach(elemento=>{logica})
+
+    // Percorre o json filme
+    filmes.forEach(filme => {
+        // Usar a 'split' para separar uma string a partir da vírgula
+        const generoLista = filme.Genre.split(",");
+
+        // Percorre a lista de generos
+        for (genero of generoLista){
+            // Se o genero for igual ao genero da requisição
+            if (genero.toLowerCase().includes(generoRequerido)) {
+                novaLista.push(filme);
             }
         }
     })
-
-    response.status(200).send(novaLista)
+    response.status(200).send(novaLista);
 }
 
-module.exports = { //exportando as funções
+// Exporta cada função
+module.exports = {
     getAll,
     getById,
     getByTitle,

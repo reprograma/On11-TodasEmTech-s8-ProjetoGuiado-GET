@@ -1,12 +1,12 @@
-const controller  = require("../controllers/filmesController")//chama o controler
+const controller = require("../controllers/filmesController");
 
-const express = require("express")//chamando o express 
-const router = express.Router()//executando Router
+const express = require("express");
+const router = express.Router();
 
-router.get("/todos", controller.getAll)//configurando continuação da rota e dizendo q ela vai usar a função getAll que esta no controller
-router.get("/title", controller.getByTitle)
-router.get("/genre", controller.getByGenre)
-router.get("/:id", controller.getById)
+// Continuação das rotas
+router.get("/all", controller.getAll);
+router.get("/title", controller.getByTitle); // A ordem influência por causa do id
+router.get("/genre", controller.getByGenre);
+router.get("/:id", controller.getById);
 
-
-module.exports = router //exportando o router
+module.exports = router;
